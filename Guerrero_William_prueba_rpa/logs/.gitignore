@@ -1,0 +1,29 @@
+# Entorno virtual
+venv/
+
+# Archivos de Python
+__pycache__/
+*.pyc
+
+# Logs
+logs/
+*.log
+
+# NO subir a github Archivo Excel generado reporte_final.xlsx pero si subir ordenes.xlsx
+data/reporte_final.xlsx
+!data/ordenes.xlsx
+
+# Archivos temporales de Excel
+~$*.xlsx
+
+# Variables de entorno
+.env
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Cache de pip
+*.egg-info/
+dist/
+build/
