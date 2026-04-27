@@ -1,6 +1,5 @@
 # Prueba tecnica2  Consolidación de Órdenes y automatizacion en python 
-# WILLIAM GUERRERO CUMACO 
-# CC 80257962
+
 
 ## Descripción general
 Automatización en Python que integra:
