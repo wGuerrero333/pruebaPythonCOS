@@ -27,3 +27,6 @@ Thumbs.db
 *.egg-info/
 dist/
 build/
+
+# Requiremets dados por pip freeze NO ugulales a los del requirements.txt
+requirementsFreeze.txt
