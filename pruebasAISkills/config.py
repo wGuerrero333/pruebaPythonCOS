@@ -17,6 +17,13 @@ TIMEOUT = 5
 INPUT_FILE = os.getenv("INPUT_FILE", "data/ordenes.xlsx")
 OUTPUT_FILE = os.getenv("OUTPUT_FILE", "data/reporte_final.xlsx")
 
+# Configuración de MySQL
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = int(os.getenv("DB_PORT", "3306"))
+DB_USER = os.getenv("DB_USER", "administradorNuevo")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "#Delcamino333")
+DB_NAME = os.getenv("DB_NAME", "scraptLibros")
+
 # Define la ruta del archivo de logs
 # ✔ No usa .env (valor fijo)
 # ✔ Guarda mensajes del sistema (errores, ejecución, etc.)

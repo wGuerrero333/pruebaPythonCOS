@@ -10,6 +10,7 @@ from typing import List, Dict, Any
 from modules.excel_handler import leer_ordenes, guardar_reporte
 from modules.api_client import obtener_estado_api
 from modules.web_scraper import obtener_datos_libro
+from modules.db_handler import crear_base_datos, crear_tabla, guardar_en_mysql
 from config import INPUT_FILE, OUTPUT_FILE, LOG_FILE
 
 
@@ -160,19 +161,33 @@ class AgenteRPA:
     
     def guardar_resultados(self) -> bool:
         """
-        Guarda los resultados en un archivo Excel
+        Guarda los resultados en Excel y MySQL
         
         Returns:
             bool: True si se guardó correctamente
         """
+        exito = True
         try:
             self.logger.info(f"Guardando reporte en: {OUTPUT_FILE}")
             guardar_reporte(self.resultados, OUTPUT_FILE)
             self.logger.info(f"✓ Reporte guardado exitosamente")
-            return True
         except Exception as e:
             self.logger.error(f"✗ Error al guardar reporte: {str(e)}")
-            return False
+            exito = False
+
+        try:
+            self.logger.info("Guardando reporte en MySQL...")
+            if crear_base_datos() and crear_tabla():
+                if guardar_en_mysql(self.resultados):
+                    self.logger.info("✓ Reporte guardado en MySQL exitosamente")
+                else:
+                    self.logger.error("✗ Error al guardar reporte en MySQL")
+                    exito = False
+        except Exception as e:
+            self.logger.error(f"✗ Error al guardar en MySQL: {str(e)}")
+            exito = False
+
+        return exito
     
     def generar_resumen(self) -> str:
         """

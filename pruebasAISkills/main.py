@@ -2,6 +2,7 @@ import logging
 from modules.excel_handler import leer_ordenes, guardar_reporte
 from modules.api_client import obtener_estado_api
 from modules.web_scraper import obtener_datos_libro
+from modules.db_handler import crear_base_datos, crear_tabla, guardar_en_mysql
 from config import INPUT_FILE, OUTPUT_FILE, LOG_FILE
 
 # Configurar logging
@@ -34,6 +35,9 @@ def main():
         })
 
     guardar_reporte(resultados, OUTPUT_FILE)
+
+    if crear_base_datos() and crear_tabla():
+        guardar_en_mysql(resultados)
 
     logging.info("Proceso finalizado correctamente")
 
