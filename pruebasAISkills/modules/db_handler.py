@@ -99,3 +99,18 @@ def guardar_en_mysql(data: List[Dict[str, Any]]):
     except Error as e:
         logging.error(f"✗ Error al guardar en MySQL: {e}")
         return False
+
+
+def leer_desde_mysql() -> List[Dict[str, Any]]:
+    try:
+        conn = obtener_conexion()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM reporte_ordenes ORDER BY orden_id")
+        registros = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        logging.info(f"✔ {len(registros)} registros leídos desde MySQL")
+        return registros
+    except Error as e:
+        logging.error(f"✗ Error al leer desde MySQL: {e}")
+        return []
